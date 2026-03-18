@@ -1,14 +1,21 @@
 import "./globals.css";
+import { Poppins } from "next/font/google";
+ 
 
 export const metadata = {
   title: "Pricely",
   description: "Don't miss the deals !!!",
 };
 
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"], // recommended set
+});
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>
+      <body className={poppins.className}>
         {children}
       </body>
     </html>
