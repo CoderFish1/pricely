@@ -1,5 +1,7 @@
 /// backend logic for logging out
 
+'use server'
+
 import { createClient } from "@/utils/supabase/server";
 import { NextResponse } from "next/server";
 
