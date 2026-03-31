@@ -4,9 +4,14 @@ import { LogIn } from "lucide-react";
 import { Bell, Tag, LineChart } from "lucide-react";
 import { AddProdForm } from "@/components/AddProdForm";
 import AuthButton from "@/components/AuthButton";
+import { createClient } from "@/utils/supabase/server";
 
-export default function Home() {
-  const user = null;
+export default async function Home() {
+  const supabase = await createClient();
+
+  const {
+    data: {user},
+  } = await supabase.auth.getUser();
 
   const products = [];
 
