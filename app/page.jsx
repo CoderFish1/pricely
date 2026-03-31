@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { LogIn } from "lucide-react";
 import { Bell, Tag, LineChart } from "lucide-react";
 import { AddProdForm } from "@/components/AddProdForm";
+import AuthButton from "@/components/AuthButton";
 
 export default function Home() {
   const user = null;
@@ -43,12 +44,8 @@ export default function Home() {
           />
         </div>
 
-        <div className="authButton m-6">
-          <Button variant="default" className="bg-emerald-600 hover:bg-emerald-700">
-            <LogIn className="w-5 h-5" />
-            SignIn
-          </Button>
-        </div>
+        {/* authButton */}
+        <AuthButton user={user} />
       </header>
 
       <section>
