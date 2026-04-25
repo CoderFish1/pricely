@@ -1,4 +1,4 @@
-/// backend logic for logging out
+/// backend logic for saving authentication token and redirecting to our page after google login 
 
 'use server'
 

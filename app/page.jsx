@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { LogIn } from "lucide-react";
-import { Bell, Tag, LineChart } from "lucide-react";
+import { Bell, Tag, LineChart, PackagePlus } from "lucide-react";
 import { AddProdForm } from "@/components/AddProdForm";
 import AuthButton from "@/components/AuthButton";
 import { createClient } from "@/utils/supabase/server";
@@ -10,7 +10,7 @@ export default async function Home() {
   const supabase = await createClient();
 
   const {
-    data: {user},
+    data: { user },
   } = await supabase.auth.getUser();
 
   const products = [];
@@ -93,6 +93,25 @@ export default async function Home() {
           </div>
         )}
       </section>
+
+      {products.length === 0 && user && (
+        <section className="max-w-2xl mx-auto mt-16 px-6">
+          <div className="relative bg-white rounded-2xl p-8 text-center shadow-sm border-2 border-dashed border-emerald-300">
+            {/* icon */}
+            <div className="w-14 h-14 mx-auto mb-4 rounded-xl border border-emerald-200 bg-emerald-50 flex items-center justify-center">
+              <PackagePlus className="w-7 h-7 text-emerald-600" />
+            </div>
+
+            <h3 className="text-2xl font-semibold text-gray-900 mb-2">
+              No Products Added Yet
+            </h3>
+
+            <p className="text-gray-600 text-lg">
+              Add your first product and start tracking prices instantly.
+            </p>
+          </div>
+        </section>
+      )}
     </main>
   );
 }

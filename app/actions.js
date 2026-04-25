@@ -1,3 +1,4 @@
+// for signout functionality
 'use server'
 
 import { createClient } from "@/utils/supabase/server"
