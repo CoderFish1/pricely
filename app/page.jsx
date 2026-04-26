@@ -56,7 +56,7 @@ export default async function Home() {
       <section>
         <div className="max-w-2xl mx-auto text-center p-10">
           <div className="madeby inline-flex items-center font-small mb-4 mt-5 bg-emerald-200 rounded-full border font-medium text-emerald-800 p-1">
-            Made By Shrey with 💻 restarting
+            Made By Shrey with 💻
           </div>
 
           <h2 className="font-semibold mb-1 text-4xl tracking-tight ">
