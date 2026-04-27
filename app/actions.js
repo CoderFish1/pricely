@@ -35,13 +35,17 @@ export async function addProduct(formData) {
     // scraping product
     const productData = await scrapeProduct(url);
 
-    if (!productData.productName || !productData.currentPrice) {
+    if (!productData || !productData.productName || !productData.currentPrice) {
       console.log(productData, "productData");
       return { error: "Could not extract product information from this url" };
     }
 
-    const newPrice = parseFloat(productData.currentPrice);
+    const newPrice = parseFloat(productData.currentPrice.replace(/[^0-9.]/g, ""));
     const currency = productData.currencyCode || "USD";
+
+    if (isNaN(newPrice)) {
+  return { error: "Could not parse price from the scraped data" };
+}
 
     const { data: exisitingProduct } = await supabase
       .from("products")
@@ -142,7 +146,7 @@ export async function getProducts() {
     }
 }
 // server action for getting pricehistory
-export async function getProducts() {
+export async function getPriceHistory(productId) {
     try {
         const supabase = await createClient();
 
