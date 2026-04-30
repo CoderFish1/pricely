@@ -5,6 +5,8 @@ import { Bell, Tag, LineChart, PackagePlus } from "lucide-react";
 import { AddProdForm } from "@/components/AddProdForm";
 import AuthButton from "@/components/AuthButton";
 import { createClient } from "@/utils/supabase/server";
+import { getProducts } from "./actions";
+import ProductCard from "@/components/ProductCard";
 
 export default async function Home() {
   const supabase = await createClient();
@@ -13,7 +15,7 @@ export default async function Home() {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const products = [];
+  const products = user ? await getProducts() : [];
 
   const features = [
     {
@@ -94,9 +96,39 @@ export default async function Home() {
         )}
       </section>
 
+      {user && products.length > 0 && (
+        <section className="max-w-6xl mx-auto mb-24 px-6 mt-16">
+          {/* Header */}
+          <div className="mb-8">
+            <h3 className="font-bold text-3xl text-emerald-900">
+              Your Tracked Products
+            </h3>
+            <p className="text-emerald-700 mt-1 text-lg">
+              {products.length} {products.length === 1 ? "product" : "products"}{" "}
+              tracked
+            </p>
+          </div>
+
+          {/* Container */}
+          <div className="p-6 rounded-3xl bg-gradient-to-br from-emerald-50 to-white border border-emerald-200 shadow-sm">
+            {/* Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              {products.map((product) => (
+                <div
+                  key={product.id}
+                  className="transition-transform duration-300 hover:-translate-y-1"
+                >
+                  <ProductCard product={product} />
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {products.length === 0 && user && (
-        <section className="max-w-2xl mx-auto mt-16 px-6">
-          <div className="relative bg-white rounded-2xl p-8 text-center shadow-sm border-2 border-dashed border-emerald-300">
+        <section className="max-w-2xl mx-auto mt-16 mb-20 px-6">
+          <div className="relative bg-white rounded-2xl p-16 text-center shadow-sm border-2 border-dashed border-emerald-300">
             {/* icon */}
             <div className="w-14 h-14 mx-auto mb-4 rounded-xl border border-emerald-200 bg-emerald-50 flex items-center justify-center">
               <PackagePlus className="w-7 h-7 text-emerald-600" />
