@@ -60,7 +60,7 @@ export const AddProdForm = ({user}) => {
             >
                 {loading ? (
                     <>
-                    <Loader2 className='h-12 m-4 animate-spain'/>
+                    <Loader2 className='h-12 m-4 animate-spin'/>
                     Adding...
                     </> 
                     ) : (

@@ -63,14 +63,11 @@ const ProductCard = ({ product }) => {
         </div>
       </CardHeader>
 
-      {/* Content */}
       <CardContent className="flex flex-col gap-3 px-4 pt-4 pb-2 flex-1">
-        {/* Name */}
         <p className="font-semibold text-sm line-clamp-2 text-gray-800 leading-snug">
           {product.name}
         </p>
 
-        {/* Price */}
         <div className="flex items-baseline gap-1">
           <span className="text-xs text-gray-400 font-medium">{product.currency}</span>
           <span className="text-2xl font-bold text-emerald-600 tracking-tight">
@@ -78,7 +75,6 @@ const ProductCard = ({ product }) => {
           </span>
         </div>
 
-        {/* Divider */}
         <div className="h-px bg-emerald-50" />
 
         {/* Actions */}
@@ -114,7 +110,6 @@ const ProductCard = ({ product }) => {
           </Button>
         </div>
 
-        {/* Delete */}
         <Button
           variant="ghost"
           onClick={handleDelete}
@@ -126,11 +121,11 @@ const ProductCard = ({ product }) => {
         </Button>
       </CardContent>
 
-      {/* Chart */}
       {showChart && (
-        <CardFooter className="px-4 pb-4 pt-0">
+        <CardFooter className="px-4 pb-4 pt-0 overflow-hidden">
           <div className="w-full rounded-xl overflow-hidden border border-emerald-100 bg-emerald-50 p-2">
-            <PriceChart productId={product.id} />
+            <PriceChart productId={product.id} currentPrice={product.current_price}
+/>
           </div>
         </CardFooter>
       )}
