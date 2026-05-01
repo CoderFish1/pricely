@@ -25,7 +25,7 @@ export async function POST(request) {
     // use service role to bypass RLS(in simple words get god level access)
     const supabase = createClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL,
-      process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_SERVICE_ROLE_KEY,
+      process.env.SUPABASE_SERVICE_ROLE_KEY,
     );
 
     const { data: products, error: productError } = await supabase
@@ -48,12 +48,14 @@ export async function POST(request) {
       try {
         const productData = await scrapeProduct(product.url);
 
-        if (!productData.currentPrice) {
+        if (!productData || !productData.currentPrice) {
           results.failed++;
           continue;
         }
 
-        const newPrice = parseFloat(productData.currentPrice);
+        const newPrice = parseFloat(
+          productData.currentPrice.replace(/[^0-9.]/g, ""),
+        );
         const oldPrice = parseFloat(product.current_price) || 0;
 
         if (isNaN(newPrice)) {
@@ -91,14 +93,14 @@ export async function POST(request) {
             if (user?.email) {
               // send email
               const emailResults = await sendPriceDropAlert(
-                userEmail,
+                user.email,
                 product,
                 oldPrice,
                 newPrice,
               );
 
-              if(emailResults.success){
-                results.alertSent++;
+              if (emailResults.success) {
+                results.alertsSent++;
               }
             }
           }
@@ -120,3 +122,5 @@ export async function POST(request) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
+
+// curl -X POST https://pricelydealchecker.vercel.app -H "Authorization: dd7fd12b6dc112a38576fa87f941862d945143c154d024f926c7adc90a2fd6fb"
