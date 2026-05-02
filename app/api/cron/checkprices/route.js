@@ -13,7 +13,11 @@ export async function POST(request) {
     const authHeader = request.headers.get("authorization");
     const cronSecret = process.env.CRON_SECRET;
 
-    if (!cronSecret || authHeader !== `Bearer ${cronSecret}`) {
+    if (
+      process.env.VERCEL &&
+      authHeader !== `Bearer ${cronSecret}` &&
+      request.headers.get("x-vercel-cron") !== "1"
+    ) {
       return NextResponse.json(
         {
           error: "Unauthorized",
