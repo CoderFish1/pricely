@@ -42,8 +42,8 @@ export const AddProdForm = ({user}) => {
   return (
     <>
     <form onSubmit={handleSubmit} className='mx-auto w-full max-w-3xl'>
-        <div className='flex flex-col sm:flex-row gap-3'
-        >
+        <div className='flex flex-col sm:flex-row gap-3 w-full'>
+            
             <Input
             type='url'
             value={url}
@@ -51,18 +51,19 @@ export const AddProdForm = ({user}) => {
             placeholder = 'Paste a product URL (Amazon, Flipkart, Myntra, etc.)'
             required
             disabled ={loading}
-            className='h-12 text-base mx-auto w-3xl border-3 hover:border-4'
+            className='h-12 text-base w-full border-2 focus:border-emerald-500'
             />
 
-            <Button className= 'mx-auto h-12 bg-emerald-800 hover:bg-emerald-700 hover:p-3 '
+            <Button 
+            className='h-12 bg-emerald-800 hover:bg-emerald-700 w-full sm:w-auto px-6'
             type="submit"
             disabled={loading}
             >
                 {loading ? (
-                    <>
-                    <Loader2 className='h-12 m-4 animate-spin'/>
-                    Adding...
-                    </> 
+                    <span className='flex items-center gap-2'>
+                      <Loader2 className='h-5 w-5 animate-spin'/>
+                      Adding...
+                    </span>
                     ) : (
                         "Track Price"
                 )}
@@ -70,7 +71,7 @@ export const AddProdForm = ({user}) => {
         </div>
     </form>
 
-    {/* authentication model */}
+    {/* authentication modal */}
     <AuthModal
               isOpen={showAuthModal}
               onClose={() => setshowAuthModal(false)}

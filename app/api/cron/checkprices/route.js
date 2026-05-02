@@ -127,4 +127,5 @@ export async function POST(request) {
   }
 }
 
+// cmd to manually check if cronjobs or not by checking prices everyday
 // curl.exe -X POST https://pricelydealchecker.vercel.app/api/cron/checkprices -H "Authorization: Bearer "
