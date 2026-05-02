@@ -123,4 +123,4 @@ export async function POST(request) {
   }
 }
 
-// curl.exe -X POST https://pricelydealchecker.vercel.app/api/cron/checkprices -H "Authorization: Bearer dd7fd12b6dc112a38576fa87f941862d945143c154d024f926c7adc90a2fd6fb"
+// curl.exe -X POST https://pricelydealchecker.vercel.app/api/cron/checkprices -H "Authorization: Bearer "
