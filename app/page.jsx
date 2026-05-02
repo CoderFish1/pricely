@@ -41,13 +41,13 @@ export default async function Home() {
   return (
     <main className="min-h-screen">
       {/* HEADER */}
-      <header className="flex items-center justify-between px-4 sm:px-8 border-emerald-200 border bg-linear-to-br from-emerald-50 to-emerald-200 h-16 sm:h-20 sticky top-0 z-50">
+      <header className="flex items-center justify-between px-4 sm:px-8 border-emerald-200 border bg-linear-to-br from-emerald-50 to-emerald-200 h-18 sm:h-20 sticky top-0 z-50">
         <Image
           src={"/pricely-logo.png"}
           alt="Pricely Logo"
           width={600}
           height={200}
-          className="h-12 sm:h-16 md:h-20 w-auto"
+          className="h-14 sm:h-16 md:h-20 w-auto"
         />
 
         <AuthButton user={user} />
